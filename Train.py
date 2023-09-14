@@ -1,12 +1,13 @@
 import datetime
 import torch
+from matplotlib import pyplot as plt
 
 
 def train(n_epochs, optimizer, model, loss_fn, train_loader, scheduler, device):
     print('training ...')
     model.train()
     losses_train = []
-
+    losses_data = torch.zeros(50)
     for epoch in range(1, n_epochs+1):
         print('epoch', epoch)
         loss_train = 0.0
@@ -24,8 +25,10 @@ def train(n_epochs, optimizer, model, loss_fn, train_loader, scheduler, device):
             optimizer.step()
             loss_train += loss.item()
 
-    scheduler.step(loss_train)
+        scheduler.step(loss_train)
+        losses_train += [loss_train/len(train_loader)]
+        print('{} Epoch {}, Training loss {}'.format(datetime.datetime.now(), epoch, loss_train/len(train_loader)))
+        losses_data[epoch-1] = loss_train/len(train_loader)
 
-    losses_train += [loss_train/len(train_loader)]
-
-    print('{} Epoch {}, Training loss {}'.format(datetime.datetime.now(), epoch, loss_train/len(train_loader)))
+    plt.plot(losses_data)
+    plt.show()
