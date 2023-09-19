@@ -22,25 +22,33 @@ model = autoencoderMLP4Layer().to(device)
 model.load_state_dict(torch.load("./MLP.8.pth"))
 model.eval()
 
+def single_test():
+    with torch.no_grad():
+        x = get_image()
+        x = flatten(x)
+        x = normalise(x)
+        x = x.to(device)
+        pred = model(x)
+
+    f = plt.figure()
+    f.add_subplot(1, 2, 1)
+    x = x.unflatten(-1,(28,28))
+    plt.imshow(x, cmap='gray')
+    f.add_subplot(1, 2, 2)
+    pred = pred.unflatten(-1,(28,28))
+    plt.imshow(pred, cmap='gray')
+    plt.show()
+
 
 def test_with_noise():
-    idx = int(input("Enter your value: "))
     with torch.no_grad():
-        test_set_flattened = torch.zeros(test_set.data.size()[0], 784, dtype=torch.float32)
-        i = 0
-
-        for img in test_set.data:
-            test_set_flattened[i] = torch.flatten(img)
-            i = i + 1
-
-        x = test_set_flattened[idx]
-        mean, std, var = torch.mean(x), torch.std(x), torch.var(x)
-        x = (x - mean) / std
+        x = get_image()
+        x = flatten(x)
+        x = normalise(x)
         noise = torch.rand(x.size(), dtype=torch.float32)
         xn = x + noise
         xn = xn.to(device)
         pred = model(xn)
-
 
     f = plt.figure()
     f.add_subplot(1, 3, 1)
@@ -64,8 +72,9 @@ def flatten(x):
     return test_set_flattened[0]
 
 def normalise(x):
-    mean, std, var = torch.mean(x), torch.std(x), torch.var(x)
-    x = (x - mean) / std
+    #mean, std, var = torch.mean(x), torch.std(x), torch.var(x)
+    #x = (x - mean) / std
+    x = x / 255
     return x
 
 def test_interpolate():
@@ -111,6 +120,11 @@ def test_interpolate():
             plt.imshow(decodedInterpolations[i], cmap='gray')
         plt.show()
 
+print("Input an image index for a single test")
+single_test()
+print("Input an image index for a single test with noise")
+test_with_noise()
+print("Input two image indices for a interpolation test")
 test_interpolate()
 
 

@@ -15,19 +15,6 @@ class autoencoderMLP4Layer(nn.Module):
 
     def forward(self, X):
         return self.decode(self.encode(X))
-        #encoder
-        X = self.fc1(X)
-        X = F.relu(X)
-        X = self.fc2(X)
-        X = F.relu(X)
-
-        #decoder
-        X = self.fc3(X)
-        X = F.relu(X)
-        X = self.fc4(X)
-        X = torch.sigmoid(X)
-
-        return X
     
     def encode(self, X):
         X = self.fc1(X)
