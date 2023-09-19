@@ -8,6 +8,8 @@ from torchvision import transforms
 from torchvision.datasets import MNIST
 import torch.optim.lr_scheduler as lr_scheduler
 
+#test comment 
+
 train_transform = transforms.Compose([transforms.ToTensor()])
 
 '''
