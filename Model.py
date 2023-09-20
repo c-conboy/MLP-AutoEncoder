@@ -1,11 +1,13 @@
 import torch
 from torch import nn
-import torch.nn.functional as F
+import torch.nn.functional as F #introduce activation functions
 
+#This class defines the learning model being used
 class autoencoderMLP4Layer(nn.Module):
     def __init__(self, N_input=784, N_bottleneck=8, N_output=784):
         super(autoencoderMLP4Layer, self).__init__()
         N2 = 392
+        #These assignments produces 4 fully connected layers
         self.fc1 = nn.Linear(N_input, N2)
         self.fc2 = nn.Linear(N2, N_bottleneck)
         self.fc3 = nn.Linear(N_bottleneck, N2)

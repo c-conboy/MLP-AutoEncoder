@@ -23,14 +23,14 @@ def train(n_epochs, optimizer, model, loss_fn, train_loader, scheduler, device):
         print('epoch', epoch)
         loss_train = 0.0
 
+        #Confirm what is going on here?
         for imgs, labels in train_loader: #for each batch of 2048 images
-            imgs2 = torch.zeros(imgs.size()[0], 784) #Create an empty tesnor that 2048 by 28*28
-            for i in range(imgs.size()[0]): #for each image in batch
-                imgs2[i] = imgs[i].flatten()#Flatten image at index and then put into
-            #Flattened
+            imgs2 = torch.zeros(imgs.size()[0], 784) #Create an empty tesnor that's 2048*28*28
+            for i in range(imgs.size()[0]): #for each image in the batch
+                imgs2[i] = imgs[i].flatten()#Flatten image at the index
             imgs2 = imgs2.to(device=device)
             outputs = model(imgs2)
-            loss = loss_fn(outputs, imgs2)
+            loss = loss_fn(outputs, imgs2) 
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
