@@ -8,8 +8,11 @@ from torchvision import transforms
 from torchvision.datasets import MNIST
 import torch.optim.lr_scheduler as lr_scheduler
 
+#test comment 
+
 train_transform = transforms.Compose([transforms.ToTensor()])
 
+#can this be removed?
 '''
 idx = int(input("Enter your value: "))
 plt.imshow(train_set.data[idx], cmap='gray')
@@ -17,6 +20,7 @@ plt.show()
 '''
 train_set = MNIST('./data/mnist', train=True, download=True, transform=train_transform)
 
+#This section is also occuring in Train.py?
 rate_learning = 1e-3
 model = Model.autoencoderMLP4Layer()
 optim = optim.Adam(model.parameters(), lr=rate_learning)
