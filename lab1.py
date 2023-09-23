@@ -4,6 +4,13 @@ from matplotlib import pyplot as plt
 from torchvision import transforms
 from torchvision.datasets import MNIST
 from Model import autoencoderMLP4Layer
+import argparse
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-l", "--Parameters")
+args = parser.parse_args()
+
 
 #Choose a device to do computation
 device = (
@@ -20,7 +27,9 @@ test_set = MNIST('./data/mnist', train=True, download=True, transform=test_trans
 
 #Run model on chosen device
 model = autoencoderMLP4Layer().to(device)
-model.load_state_dict(torch.load("./MLP.8.pth")) #what does this line do?
+#Load save parameters
+model.load_state_dict(torch.load(args.Parameters))
+#Set to eval mode
 model.eval()
 
 def single_test():
@@ -73,10 +82,7 @@ def flatten(x):
     test_set_flattened[0] = torch.flatten(x)
     return test_set_flattened[0]
 
-#why is stuff commented out here?
 def normalise(x):
-    #mean, std, var = torch.mean(x), torch.std(x), torch.var(x)
-    #x = (x - mean) / std
     x = x / 255
     return x
 
