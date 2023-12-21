@@ -13,19 +13,19 @@ This repository contains a simple implementation of an autoencoder with a 4-laye
 ### Installation
   pip install -r requirements.txt
 ### Running the Code
-**Single Test
+**Single Test**
 To perform a single test, run the following command:
   python your_script.py -l path/to/saved_parameters.pth
   
 You will be prompted to enter an image index for testing.
 
-**Test with Noise
+**Test with Noise**
 To test with noise, run the following command:
   python your_script.py -l path/to/saved_parameters.pth
   
 You will be prompted to enter an image index for testing with noise.
 
-**Interpolation Test
+**Interpolation Test**
 To perform an interpolation test, run the following command:
   python your_script.py -l path/to/saved_parameters.pth
   
