@@ -4,45 +4,12 @@ This repository contains a simple implementation of an autoencoder with a 4-laye
 
 ## Usage
 
-### Prerequisites
-
-- Python 3
-- PyTorch
-- Matplotlib
-
-### Installation
-
-```
-  pip install -r requirements.txt
-```
-
 ### Running the Code
-**Single Test**
 
-To perform a single test, run the following command:
-
-```
-  python your_script.py -l path/to/saved_parameters.pth
-```
-
-You will be prompted to enter an image index for testing.
-
-**Test with Noise**
-
-To test with noise, run the following command:
+To perform a  test, run the following command:
 
 ```
-  python your_script.py -l path/to/saved_parameters.pth
+python test.py
 ```
-  
-You will be prompted to enter an image index for testing with noise.
 
-**Interpolation Test**
-
-To perform an interpolation test, run the following command:
-
-```
-  python your_script.py -l path/to/saved_parameters.pth
-```
-  
-You will be prompted to enter two image indices for interpolation testing.
+First You will be prompted to enter an image index for testing, then you will be prompted to enter an image index for testing denoising, finnaly you will be prompted to enter two image indices for interpolation testing.
